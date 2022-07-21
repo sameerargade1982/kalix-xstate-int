@@ -1,4 +1,4 @@
-import { createMachine } from 'xstate';
+import { createMachine,interpret } from 'xstate';
 
 // async request/response hierarchical states
 const PromiseStates = {
@@ -173,6 +173,4 @@ const dealRequestService = interpret(DealRequestMachine).onTransition((state) =>
 
 dealRequestService.start();
 
-//dealRequestService.send({ type: 'UnderConstruction' });
-
-export default dealRequestService;
+export {DealRequestMachine,dealRequestService};

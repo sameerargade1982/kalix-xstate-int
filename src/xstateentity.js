@@ -4,7 +4,7 @@
  */
 
 import { EventSourcedEntity, Reply } from "@kalix-io/kalix-javascript-sdk";
-import { dealRequestService } from "./DealRequestMachine"
+import { dealRequestService, DealRequestMachine } from "./DealRequestMachine.js"
 
 /**
  * Type definitions.
@@ -38,10 +38,7 @@ entity.setInitial(entityId => XStateState.create({}));
 entity.setBehavior(state => ({
   commandHandlers: {
     SaveState(command, state, ctx) {
-
-      //dealRequestService.start();
-
-      dealRequestService.send({ type: 'UnderConstruction' });
+      dealRequestService.send({ type: 'SUBMIT' });
 
       return Reply.failure("The command handler for `SaveState` is not implemented, yet");
     },
