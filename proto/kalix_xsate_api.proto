@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package kalix.xstate.api;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "kalix/annotations.proto";
+
+
+message XState {
+    string state = 1;
+  }
+
+message GetXstate {
+    string state = 1;
+}
+  service KalixXstate {
+    option (kalix.codegen) = {
+      event_sourced_entity: {
+        name: "kalix.xstate.domain.XStateEntity"
+        entity_type: "kalix-xstate"
+        state: "kalix.xstate.domain.XStateState"
+        events: "kalix.xstate.domain.StateSaved"
+      }
+    };
+
+    rpc SaveState(XState) returns (google.protobuf.Empty) {
+    }
+  
+    rpc GetState(GetXstate) returns (XState) {
+      };
+    }

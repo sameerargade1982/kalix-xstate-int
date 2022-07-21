@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package kalix.xstate.domain;
+
+message XStateState {
+  string state = 1;
+}
+
+message StateSaved {
+    string state = 1;
+  }
